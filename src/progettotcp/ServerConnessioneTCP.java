@@ -5,6 +5,7 @@
  */
 package progettotcp;
 
+import java.io.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,17 +28,25 @@ public class ServerConnessioneTCP {
         ServerSocket sSocket = null;
         //oggetto da usare per realizzare la connessione TCP
         Socket connection;
-
+        DataInputStream in;
+        DataOutputStream out;
+                
         while(true){
             try{
                 // il server si mette in ascolto sulla porta voluta
                 sSocket = new ServerSocket(port);
                 System.out.println("In attesa di connessioni!");
+                
                 //si è stabilita la connessione
                 connection = sSocket.accept();
                 System.out.println("Connessione stabilita!");
-                System.out.println("Socket server: " + connection.getLocalSocketAddress());
-                System.out.println("Socket client: " + connection.getRemoteSocketAddress());
+                in = new DataInputStream(connection.getInputStream());
+                out = new DataOutputStream(connection.getOutputStream());
+                System.out.println("Il client dice: " + in.readUTF());
+                out.writeUTF("25/01/2018");
+                out.flush();
+                //System.out.println("Socket server: " + connection.getLocalSocketAddress());
+                //System.out.println("Socket client: " + connection.getRemoteSocketAddress());
             }
                catch(IOException e){
                    System.err.println("Errore di I/O!");
