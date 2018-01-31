@@ -27,16 +27,21 @@ public class ClientConnessioneTCP {
         String serverAddress = "localhost";
         //porta del server in ascolto
         int port = 2000;
+        //oggetto per inviare messaggi al server
         DataOutputStream out;
+        //oggetto per ricevere messaggi dal server
         DataInputStream in;
         //apertura della connessione al server sulla porta specificata
         try{
+            //istanzio l'oggetto per instaurare la connessione
             connection = new Socket(serverAddress, port);
             System.out.println("Connessione aperta");
             out = new DataOutputStream(connection.getOutputStream());
             in = new DataInputStream(connection.getInputStream());
+            //invio il messaggio al server
             out.writeUTF("Voglio la data");
             out.flush();
+            //mostro il messaggio ricevuto dal server
             System.out.println("Server dice: " + in.readUTF());
             
         }
