@@ -31,8 +31,11 @@ public class ServerConnessioneTCP {
         ServerSocket sSocket = null;
         //oggetto da usare per realizzare la connessione TCP
         Socket connection;
+        //oggetto per ricevere messaggi dal client
         DataInputStream in;
+        //oggetto per inviare messaggi al client
         DataOutputStream out;
+        //oggetto per ottenere la data corrente
         DateFormat dateFormat;
                 
         while(true){
