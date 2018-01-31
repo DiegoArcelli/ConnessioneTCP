@@ -9,6 +9,9 @@ import java.io.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +33,7 @@ public class ServerConnessioneTCP {
         Socket connection;
         DataInputStream in;
         DataOutputStream out;
+        DateFormat dateFormat;
                 
         while(true){
             try{
@@ -40,10 +44,12 @@ public class ServerConnessioneTCP {
                 //si è stabilita la connessione
                 connection = sSocket.accept();
                 System.out.println("Connessione stabilita!");
+                dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = new Date();
                 in = new DataInputStream(connection.getInputStream());
                 out = new DataOutputStream(connection.getOutputStream());
                 System.out.println("Il client dice: " + in.readUTF());
-                out.writeUTF("25/01/2018");
+                out.writeUTF(dateFormat.format(date));
                 out.flush();
                 //System.out.println("Socket server: " + connection.getLocalSocketAddress());
                 //System.out.println("Socket client: " + connection.getRemoteSocketAddress());
