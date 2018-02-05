@@ -5,9 +5,11 @@
  */
 package progettotcp;
 
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.net.ConnectException;
@@ -27,17 +29,17 @@ public class ClientConnessioneTCP {
         String serverAddress = "localhost";
         //porta del server in ascolto
         int port = 2000;
-        DataOutputStream out;
-        DataInputStream in;
+        BufferedWriter out;
+        //DataInputStream in;
         //apertura della connessione al server sulla porta specificata
         try{
             connection = new Socket(serverAddress, port);
             System.out.println("Connessione aperta");
-            out = new DataOutputStream(connection.getOutputStream());
-            in = new DataInputStream(connection.getInputStream());
-            out.writeUTF("Voglio la data");
+            out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+            //in = new DataInputStream(connection.getInputStream());
+            out.write("prova");
             out.flush();
-            System.out.println("Server dice: " + in.readUTF());
+            //System.out.println("Server dice: " + in.readUTF());
             
         }
         catch(ConnectException e){

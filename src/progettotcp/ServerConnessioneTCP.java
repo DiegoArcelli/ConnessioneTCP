@@ -31,9 +31,9 @@ public class ServerConnessioneTCP {
         ServerSocket sSocket = null;
         //oggetto da usare per realizzare la connessione TCP
         Socket connection;
-        DataInputStream in;
-        DataOutputStream out;
-        DateFormat dateFormat;
+        BufferedReader in;
+        //DataOutputStream out;
+        //DateFormat dateFormat;
                 
         while(true){
             try{
@@ -44,13 +44,13 @@ public class ServerConnessioneTCP {
                 //si è stabilita la connessione
                 connection = sSocket.accept();
                 System.out.println("Connessione stabilita!");
-                dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                Date date = new Date();
-                in = new DataInputStream(connection.getInputStream());
-                out = new DataOutputStream(connection.getOutputStream());
-                System.out.println("Il client dice: " + in.readUTF());
-                out.writeUTF(dateFormat.format(date));
-                out.flush();
+                //dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                //Date date = new Date();
+                in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                //out = new DataOutputStream(connection.getOutputStream());
+                System.out.println("Il client dice: " + in.readLine());
+                //out.writeUTF(dateFormat.format(date));
+                //out.flush();
                 //System.out.println("Socket server: " + connection.getLocalSocketAddress());
                 //System.out.println("Socket client: " + connection.getRemoteSocketAddress());
             }
